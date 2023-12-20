@@ -4,7 +4,7 @@ import Header from "./components/Header"
 import Lista from './mocks/Palavras_disc'
 
 function App() {
-  const [resultado, setResultado] = useState(true);
+  const [resultado, setResultado] = useState(false);
   function calcularResultado(){
     setResultado(true)
   }
