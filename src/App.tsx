@@ -20,15 +20,15 @@ function App() {
     for(let i = 1; i <= 10; i++){
       const D = `d${i}`;
       const I = `i${i}`;
-      const S = `i${i}`;
-      const C = `i${i}`;
+      const S = `s${i}`;
+      const C = `c${i}`;
       
       if(!isNaN(data[D] = parseInt(data[D]))){
         EXECUTOR += data[D]
       }
 
       if(!isNaN(data[I] = parseInt(data[I]))){
-        COMUNICADOR += data[D]
+        COMUNICADOR += data[I]
       }
       
       if(!isNaN(data[S] = parseInt(data[S]))){
@@ -38,7 +38,6 @@ function App() {
       if(!isNaN(data[C] = parseInt(data[C]))){
         ANALISTA += data[C]
       }
-
     }
 
     setTotalExecutor(EXECUTOR)
