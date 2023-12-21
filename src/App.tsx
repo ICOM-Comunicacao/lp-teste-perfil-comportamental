@@ -62,6 +62,7 @@ function App() {
         setTotalAnalista(0)
       }
     }
+    window.scrollTo(0, 0);
   }, [resultado])
 
   return (
