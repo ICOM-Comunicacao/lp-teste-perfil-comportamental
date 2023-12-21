@@ -1,13 +1,69 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Lista from './mocks/Palavras_disc'
 
 function App() {
   const [resultado, setResultado] = useState(false);
+  const [TOTAL_EXECUTOR, setTotalExecutor] = useState(0);
+  const [TOTAL_COMUNICADOR, setTotalComunicador] = useState(0);
+  const [TOTAL_PLANEJADOR, setTotalPlanejador] = useState(0);
+  const [TOTAL_ANALISTA, setTotalAnalista] = useState(0);
+  const [data, setData] = useState<any>({})
+
   function calcularResultado(){
+    let EXECUTOR: number = 0;
+    let COMUNICADOR: number = 0;
+    let PLANEJADOR: number = 0;
+    let ANALISTA: number = 0;
+
+    for(let i = 1; i <= 10; i++){
+      const D = `d${i}`;
+      const I = `i${i}`;
+      const S = `i${i}`;
+      const C = `i${i}`;
+      
+      if(!isNaN(data[D] = parseInt(data[D]))){
+        EXECUTOR += data[D]
+      }
+
+      if(!isNaN(data[I] = parseInt(data[I]))){
+        COMUNICADOR += data[D]
+      }
+      
+      if(!isNaN(data[S] = parseInt(data[S]))){
+        PLANEJADOR += data[S]
+      }
+      
+      if(!isNaN(data[C] = parseInt(data[C]))){
+        ANALISTA += data[C]
+      }
+
+    }
+
+    setTotalExecutor(EXECUTOR)
+    setTotalComunicador(COMUNICADOR)
+    setTotalPlanejador(PLANEJADOR)
+    setTotalAnalista(ANALISTA)
+
     setResultado(true)
   }
+
+  const adicionarValores = (e: any)=>{
+    setData({...data, [e.target.name]: e.target.value})
+  }
+
+  useEffect(()=>{
+    if(!resultado){
+      return () =>{
+        setData({})
+        setTotalExecutor(0)
+        setTotalComunicador(0)
+        setTotalPlanejador(0)
+        setTotalAnalista(0)
+      }
+    }
+  }, [resultado])
 
   return (
     <>
@@ -20,7 +76,7 @@ function App() {
                   {items.row.map((item, index) => (
                     <div className="flex gap-4 w-full px-3 py-4 md:py-0" key={index}>
                       <div className="group flex items-center justify-center">
-                          <input type="text" className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                          <input type="text" onChange={(e) => adicionarValores(e)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
                       </div>
                       <div className="flex flex-col">
                           <ul>
@@ -47,8 +103,9 @@ function App() {
                   <div className="px-3 py-4 md:py-0">
                     <div className="w-fit">
                       <div className="flex gap-4">
+                        <span className="flex items-center font-bold">%</span>
                         <div className="group flex items-center justify-center">
-                            <input disabled type="text" className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                            <input disabled type="text" defaultValue={TOTAL_EXECUTOR} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
                         </div>
                         <div className="flex flex-col">
                             <p className="uppercase font-bold">Total<br/>vermelho</p>
@@ -61,8 +118,9 @@ function App() {
                   <div className="px-3 py-4 md:py-0">
                     <div className="w-fit">
                       <div className="flex gap-4">
+                        <span className="flex items-center font-bold">%</span>
                         <div className="group flex items-center justify-center">
-                          <input disabled type="text" className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                          <input disabled type="text" defaultValue={TOTAL_COMUNICADOR} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
                         </div>
                         <div className="flex flex-col">
                             <p className="uppercase font-bold">Total<br/>amarelo</p>
@@ -75,8 +133,9 @@ function App() {
                   <div className="px-3 py-4 md:py-0">
                     <div className="w-fit">
                       <div className="flex gap-4">
+                        <span className="flex items-center font-bold">%</span>
                         <div className="group flex items-center justify-center">
-                            <input disabled type="text" className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                            <input disabled type="text" defaultValue={TOTAL_PLANEJADOR} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
                         </div>
                         <div className="flex flex-col">
                             <p className="uppercase font-bold">Total<br/>verde</p>
@@ -90,8 +149,9 @@ function App() {
                   <div className="px-3 py-4 md:py-0">
                     <div className="w-fit">
                       <div className="flex gap-4">
+                        <span className="flex items-center font-bold">%</span>
                         <div className="group flex items-center justify-center">
-                            <input disabled type="text" className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                            <input disabled type="text" defaultValue={TOTAL_ANALISTA} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
                         </div>
                         <div className="flex flex-col">
                             <p className="uppercase font-bold">Total<br/>azul</p>
