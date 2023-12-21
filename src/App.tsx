@@ -166,6 +166,11 @@ function App() {
               </div>
               <br/>
               <br/>
+              <div className="flex justify-center items-center">
+                <button type="button" onClick={()=> setResultado(false)} className="text-white uppercase bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-300">Refazer teste</button>
+              </div>
+              <br/>
+              <br/>
               <br/>
               <div className="flex flex-col gap-2 mt-5">
                 <div className="flex max-w-[648px] flex-col items-center md:flex-row w-full mx-auto gap-2 relative">
@@ -227,12 +232,7 @@ function App() {
                 <br/>
                 <p className="text-xl">Vale ressaltar que os perfis: Comunicador e Executor são aqueles considerados extrovertidos, ou seja, que possuem mais abertura para lidar com as pessoas, interagir e relacionar-se com elas. Já os perfis: Planejador e Analista são mais introvertidos e, por isso, mais voltados para os processos e resultados do que para as relações humanas.</p>
               </div>
-              <br/>
-              <br/>
-              <br/>
-              <div className="flex justify-center items-center">
-                <button type="button" onClick={()=> setResultado(false)} className="text-white uppercase bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-300">Refazer teste</button>
-              </div>
+              
             </>
           }
         </main>
