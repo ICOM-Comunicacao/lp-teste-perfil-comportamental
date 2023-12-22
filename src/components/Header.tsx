@@ -1,4 +1,4 @@
-import LogoIcom from '../assets/img/logo.svg'
+import LogoIcom from '../assets/img/logo.png'
 
 const Header: React.FC = ()=>{
      return (

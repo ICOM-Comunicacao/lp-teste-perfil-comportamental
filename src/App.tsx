@@ -3,6 +3,21 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Lista from './mocks/Palavras_disc'
 
+interface OptionSelect {
+  id: number,
+  disabled: boolean
+}
+
+interface RowList {
+  keywords: string[],
+  name: string,
+  options: OptionSelect[]
+}
+
+interface Lista {
+  row: RowList[]
+}
+
 function App() {
   const [resultado, setResultado] = useState(false);
   const [TOTAL_EXECUTOR, setTotalExecutor] = useState(0);
@@ -10,6 +25,7 @@ function App() {
   const [TOTAL_PLANEJADOR, setTotalPlanejador] = useState(0);
   const [TOTAL_ANALISTA, setTotalAnalista] = useState(0);
   const [data, setData] = useState<any>({})
+  const [lista, setLista] = useState<Lista[]>([])
 
   function calcularResultado(){
     let EXECUTOR: number = 0;
@@ -64,6 +80,10 @@ function App() {
     }
     window.scrollTo(0, 0);
   }, [resultado])
+  
+  useEffect(()=>{
+    setLista(Lista)
+  }, [])
 
   return (
     <>
@@ -71,12 +91,15 @@ function App() {
         <main className="min-h-[calc(100vh_-_139.16px)] p-3 w-full max-w-[1300px] mx-auto">
           {!resultado ?
             <>
-              {Lista.map((items, i) => (
+              {lista.map((items, i) => (
                 <div key={i} className={`flex justify-between flex-wrap md:flex-nowrap py-10 ${(Lista.length - 1) != i ? 'border-b-2': ''}`}>
                   {items.row.map((item, index) => (
                     <div className="flex gap-4 w-full px-3 py-4 md:py-0" key={index}>
                       <div className="group flex items-center justify-center">
-                          <input type="text" onChange={(e) => adicionarValores(e)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5" />
+                          <select onChange={(e) => adicionarValores(e)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5">
+                            <option value="">...</option>
+                            {item.options.map((option, indexOption) => <option key={indexOption} disabled={option.disabled} value={option.id}>{option.id}</option>)}
+                          </select>
                       </div>
                       <div className="flex flex-col">
                           <ul>
