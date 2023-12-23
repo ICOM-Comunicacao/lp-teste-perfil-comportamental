@@ -5,7 +5,8 @@ import Lista from './mocks/Palavras_disc'
 
 interface OptionSelect {
   id: number,
-  disabled: boolean
+  disabled: boolean,
+  row_id: number
 }
 
 interface RowList {
@@ -64,8 +65,31 @@ function App() {
     setResultado(true)
   }
 
-  const adicionarValores = (e: any)=>{
+  const adicionarValores = (e: any, items: Lista, index: number)=>{
+    const value = e.target.value
+    items.row.map((item, indexItem) => {
+      item.options.map((option, indexOption) => {
+        if(option.id == value && option.row_id == index){
+          option.disabled = true
+        }
+      })
+    })
     setData({...data, [e.target.name]: e.target.value})
+  }
+  
+  const liberarBotoes = (items: Lista, index: number)=>{
+    const valuesToReset: any = {}
+    items.row.map((item, indexItem) => {
+      item.options.map((option, indexOption) => {
+        if(option.row_id == index){
+          option.disabled = false
+        }
+      })
+
+      valuesToReset[item.name] = 0;
+    })
+
+    setData({...data, ...valuesToReset})
   }
 
   useEffect(()=>{
@@ -92,11 +116,11 @@ function App() {
           {!resultado ?
             <>
               {lista.map((items, i) => (
-                <div key={i} className={`flex justify-between flex-wrap md:flex-nowrap py-10 ${(Lista.length - 1) != i ? 'border-b-2': ''}`}>
+                <form onSubmit={(e) => e.preventDefault()} key={i} className={`flex justify-between flex-wrap md:flex-nowrap py-10 ${(Lista.length - 1) != i ? 'border-b-2': ''}`}>
                   {items.row.map((item, index) => (
                     <div className="flex gap-4 w-full px-3 py-4 md:py-0" key={index}>
                       <div className="group flex items-center justify-center">
-                          <select onChange={(e) => adicionarValores(e)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5">
+                          <select onChange={(e) => adicionarValores(e, items, i)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5">
                             <option value="">...</option>
                             {item.options.map((option, indexOption) => <option key={indexOption} disabled={option.disabled} value={option.id}>{option.id}</option>)}
                           </select>
@@ -108,7 +132,8 @@ function App() {
                       </div>
                     </div>
                   ))} 
-                </div>
+                  <button type="reset" onClick={() => liberarBotoes(items, i)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-300">Limpar seleção</button>
+                </form>
               ))}
               <br/>
               <div className="flex justify-center items-center">
