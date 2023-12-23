@@ -92,15 +92,28 @@ function App() {
     setData({...data, ...valuesToReset})
   }
 
+  function resetarTudo(){
+    
+    const valuesToReset: any = {}
+    lista.map((items) => {
+      items.row.map((item) => {
+        item.options.map((option) => {
+          option.disabled = false
+        })  
+        valuesToReset[item.name] = 0;
+      })
+    })
+
+    setTotalExecutor(0)
+    setTotalComunicador(0)
+    setTotalPlanejador(0)
+    setTotalAnalista(0)
+    setData({...data, ...valuesToReset})
+  }
+
   useEffect(()=>{
     if(!resultado){
-      return () =>{
-        setData({})
-        setTotalExecutor(0)
-        setTotalComunicador(0)
-        setTotalPlanejador(0)
-        setTotalAnalista(0)
-      }
+      resetarTudo()
     }
     window.scrollTo(0, 0);
   }, [resultado])
