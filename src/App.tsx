@@ -67,8 +67,8 @@ function App() {
 
   const adicionarValores = (e: any, items: Lista, index: number)=>{
     const value = e.target.value
-    items.row.map((item, indexItem) => {
-      item.options.map((option, indexOption) => {
+    items.row.map((item) => {
+      item.options.map((option) => {
         if(option.id == value && option.row_id == index){
           option.disabled = true
         }
@@ -79,8 +79,8 @@ function App() {
   
   const liberarBotoes = (items: Lista, index: number)=>{
     const valuesToReset: any = {}
-    items.row.map((item, indexItem) => {
-      item.options.map((option, indexOption) => {
+    items.row.map((item) => {
+      item.options.map((option) => {
         if(option.row_id == index){
           option.disabled = false
         }
