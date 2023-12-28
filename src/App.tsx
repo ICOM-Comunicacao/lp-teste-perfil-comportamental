@@ -128,13 +128,16 @@ function App() {
         <main className="min-h-[calc(100vh_-_139.16px)] p-3 w-full max-w-[1300px] mx-auto">
           {!resultado ?
             <>
+              <section className="my-10 border border-slate-300 shadow-md rounded-md bg-slate-100 p-5">
+                <p className="text-gray-700">Observe que cada linha possui 4 <strong>campos de seleção</strong>, dentro de cada campo tem numeros de 1 a 4. Para cada linha, os números não podem se repetir! É necessário escolher qual a opção você mais se identifica, sendo 4 o valor no qual <strong>se identifica mais</strong> e 1 o valor no qual <strong>se identifica menos</strong>. Caso tenha selecionado uma opção que considera <strong>incorreta</strong> clique no botão de <strong>limpar seleção</strong>.</p>
+              </section>
               {lista.map((items, i) => (
                 <form onSubmit={(e) => e.preventDefault()} key={i} className={`flex justify-between flex-wrap md:flex-nowrap py-10 ${(Lista.length - 1) != i ? 'border-b-2': ''}`}>
                   {items.row.map((item, index) => (
                     <div className="flex gap-4 w-full px-3 py-4 md:py-0" key={index}>
                       <div className="group flex items-center justify-center">
                           <select onChange={(e) => adicionarValores(e, items, i)} name={item.name} className="bg-gray-50 border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-12 p-2.5">
-                            <option value="">...</option>
+                            <option value=""></option>
                             {item.options.map((option, indexOption) => <option key={indexOption} disabled={option.disabled} value={option.id}>{option.id}</option>)}
                           </select>
                       </div>
